@@ -8,7 +8,7 @@ $query = "INSERT INTO categories (category_name) VALUES('$category_name')";
 $result = mysqli_query($connect, $query);
 
 if ($result) {
-    header("location: index.php");
+    header("location: index_categories.php");
 } else {
     echo "penyimpanan gagal";
 }
