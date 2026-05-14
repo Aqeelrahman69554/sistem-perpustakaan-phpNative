@@ -12,6 +12,6 @@ WHERE id = '$id'";
 
 mysqli_query($connect, $query);
 
-header("Location: index.php");
+header("Location: index_categories.php");
 
 exit;

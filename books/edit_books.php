@@ -3,13 +3,20 @@
 require_once __DIR__ . '/../connection.php';
 
 $id = $_GET['id'];
-$query_books = "SELECT * FROM books WHERE id='$id' ";
-$query_categories = mysqli_query($connect,"SELECT * FROM categories");
+$query_books =  "SELECT books.*, categories.category_name 
+FROM books 
+INNER JOIN categories ON books.category_id = categories.id WHERE books.id = '$id'"  ;
+$query_categories = mysqli_query($connect, "SELECT * FROM categories");
 
 
 $query = mysqli_query($connect, $query_books);
 
 $data = mysqli_fetch_assoc($query);
+
+if (!$data) {
+    echo "Data buku tidak ditemukan.";
+    exit;
+}
 
 ?>
 
@@ -77,11 +84,11 @@ $data = mysqli_fetch_assoc($query);
 
             <label>Kategori</label>
             <select name="category_id" id="">
-                <?php while($category = mysqli_fetch_assoc($query_categories)) : ?>
-                <option value="<?= $category['id'] ?>" <?= $category['id'] == $data['category_id'] ?'selected' : '' ?>><?= $category['category_name'] ?></option>
+                <?php while ($category = mysqli_fetch_assoc($query_categories)) : ?>
+                    <option value="<?= $category['id'] ?>" <?= $category['id'] == $data['category_id'] ? 'selected' : '' ?>><?= $category['category_name'] ?></option>
                 <?php endwhile; ?>
             </select>
-           
+
 
             <label>Penulis</label>
             <input type="text" name="author" value="<?= $data['author'] ?>">
