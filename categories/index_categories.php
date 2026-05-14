@@ -18,7 +18,7 @@ $query = mysqli_query($connect, $query_category);
 <body>
 
     <h1>Selamat Datang di Halaman Kategori Buku</h1>
-    <button><a href="create.php">Tambah Kategori</a></button>
+    <button><a href="create_categories.php">Tambah Kategori</a></button>
     <br><br>
     <table border="1">
         <thead>
@@ -37,8 +37,8 @@ $query = mysqli_query($connect, $query_category);
                 <td><?= $no++ ?></td>
                 <td><?= $data['category_name'] ?></td>
                 <td>
-                    <a href="edit.php?id=<?= $data['id'] ?>">Edit</a>    
-                    <a href="delete.php?id=<?= $data['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
+                    <a href="edit_categories.php?id=<?= $data['id'] ?>">Edit</a>    
+                    <a href="delete_categories.php?id=<?= $data['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
                 </td>
             </tr>
 

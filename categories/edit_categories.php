@@ -14,7 +14,7 @@ $data = mysqli_fetch_assoc($query);
 <h1>Halaman Edit Kategori</h1>
 
 
-<form action="update.php" method="POST">
+<form action="update_categories.php" method="POST">
     <input type="hidden" name="id" value="<?= $data['id'] ?>">
     <label for="">Nama Kategori</label> :
     <input type="text" name="category_name" value="<?= $data['category_name'] ?>">
