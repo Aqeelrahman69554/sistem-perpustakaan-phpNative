@@ -3,9 +3,9 @@
 require_once __DIR__ . '/../connection.php';
 
 $id = $_GET['id'];
-$query_books =  "SELECT books.*, categories.category_name 
-FROM books 
-INNER JOIN categories ON books.category_id = categories.id WHERE books.id = '$id'"  ;
+$query_books =  "SELECT books.*, categories.category_name
+FROM books
+INNER JOIN categories ON books.category_id = categories.id WHERE books.id = '$id'";
 $query_categories = mysqli_query($connect, "SELECT * FROM categories");
 
 
@@ -78,6 +78,9 @@ if (!$data) {
 
         <form action="update_books.php" method="POST">
             <input type="hidden" name="id" value="<?= $data['id'] ?>">
+
+            <label for="">Kode Buku</label>
+            <input type="text" name="book_code" value="<?= $data['book_code'] ?>">
 
             <label>Judul Buku</label>
             <input type="text" name="title" value="<?= $data['title'] ?>">

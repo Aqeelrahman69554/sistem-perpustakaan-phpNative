@@ -4,6 +4,7 @@ require_once __DIR__ . '/../connection.php';
 
 $id = $_POST['id'];
 
+$book_code = $_POST['book_code'];
 $title = $_POST['title'];
 $category_id = $_POST['category_id'];
 $author = $_POST['author'];
@@ -12,10 +13,11 @@ $relase_year = $_POST['relase_year'];
 $stock = $_POST['stock'];
 $description = $_POST['description'];
 
-$query = "UPDATE books SET 
+$query = "UPDATE books SET
+book_code = '$book_code',
 title ='$title',
-category_id ='$category_id', 
-author = '$author', 
+category_id ='$category_id',
+author = '$author',
 publisher = '$publisher',
 relase_year = '$relase_year',
 stock = '$stock',

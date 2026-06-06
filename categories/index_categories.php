@@ -16,6 +16,9 @@ $query = mysqli_query($connect, $query_category);
 </head>
 
 <body>
+    <?php $base_path = '../' ?>
+    <?php include '../layouts/navbar.php'; ?>
+    <hr>
 
     <h1>Selamat Datang di Halaman Kategori Buku</h1>
     <button><a href="create_categories.php">Tambah Kategori</a></button>
@@ -33,18 +36,21 @@ $query = mysqli_query($connect, $query_category);
             while ($data = mysqli_fetch_assoc($query)) :
             ?>
 
-            <tr>
-                <td><?= $no++ ?></td>
-                <td><?= $data['category_name'] ?></td>
-                <td>
-                    <a href="edit_categories.php?id=<?= $data['id'] ?>">Edit</a>    
-                    <a href="delete_categories.php?id=<?= $data['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
-                </td>
-            </tr>
+                <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= $data['category_name'] ?></td>
+                    <td>
+                        <a href="edit_categories.php?id=<?= $data['id'] ?>">Edit</a>
+                        <a href="delete_categories.php?id=<?= $data['id'] ?>" onclick="return confirm('yakin ingin menghapus?')">Hapus</a>
+                    </td>
+                </tr>
 
             <?php endwhile; ?>
         </tbody>
     </table>
+
+    <hr>
+    <?php include '../layouts/footer.php' ?>
 </body>
 
 </html>

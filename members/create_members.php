@@ -11,6 +11,10 @@
     <h1>Halaman Tambah Anggota</h1>
 
     <form action="store_members.php" method="post">
+
+        <label for="">ID Anggota</label>
+        <input type="number" name="id_anggota" required><br><br>
+
         <label for="">Nama Lengkap : </label>
         <input type="text" name="nama" placeholder="masukan nama anda disini" required>
         <br><br>

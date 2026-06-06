@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../connection.php';
 
-$id = $_GET['id'];
+$id = $_GET['id_anggota'];
 
-$query_members = "SELECT * FROM members WHERE  id = '$id'";
+$query_members = "SELECT * FROM members WHERE  id_anggota = '$id'";
 
 $query = mysqli_query($connect, $query_members);
 $data = mysqli_fetch_assoc($query);
@@ -25,7 +25,8 @@ $data = mysqli_fetch_assoc($query);
 <body>
     <h1>Halaman Edit</h1>
     <form action="update_members.php" method="post">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+        <label for="">ID Anggota</label>
+        <input type="number" name="id_anggota" value="<?= $data['id_anggota'] ?>"><br><br>
 
         <label for="">Nama Lengkap : </label>
         <input type="text" name="nama" value="<?= $data['full_name'] ?>"><br><br>

@@ -8,4 +8,6 @@ $connect = mysqli_connect($host, $username, $password, $database);
 
 if (!$connect) {
     die("gagal");
+}else{
+    echo "berhasil";
 }

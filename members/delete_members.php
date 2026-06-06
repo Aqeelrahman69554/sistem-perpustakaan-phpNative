@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../connection.php';
 
-$id = $_GET['id'];
+$id = $_GET['id_anggota'];
 
-$query_delete_members = "DELETE FROM members WHERE id = '$id'";
+$query_delete_members = "DELETE FROM members WHERE id_anggota = '$id'";
 
 $result = mysqli_query($connect, $query_delete_members);
 

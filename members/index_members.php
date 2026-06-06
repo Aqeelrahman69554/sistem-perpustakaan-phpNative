@@ -26,6 +26,8 @@ $query = mysqli_query($connect, $query_members);
 </head>
 
 <body>
+    <?php $base_path = '../' ?>
+    <?php include '../layouts/navbar.php' ?>
     <h1>Selamat Datang di Halaman Anggota</h1>
     <button><a href="create_members.php">Tambah Anggota</a></button>
     <br><br>
@@ -33,6 +35,7 @@ $query = mysqli_query($connect, $query_members);
     <table border="2px">
         <thead>
             <th>No</th>
+            <th>ID Anggota</th>
             <th>Nama Lengkap</th>
             <th>Jenis Kelamin</th>
             <th>No. Telp</th>
@@ -46,13 +49,14 @@ $query = mysqli_query($connect, $query_members);
             while ($data = mysqli_fetch_assoc($query)) : ?>
                 <tr>
                     <td><?= $no++ ?></td>
+                    <td><?= $data['id_anggota'] ?></td>
                     <td><?= $data['full_name'] ?></td>
                     <td><?= $data['gender'] ?></td>
                     <td><?= $data['phone'] ?></td>
                     <td><?= $data['address'] ?></td>
                     <td>
-                        <a href="edit_members.php?id=<?= $data['id'] ?>">Edit</a>
-                        <a href="delete_members.php?id=<?= $data['id'] ?>" onclick="return confirm('Yakin ingin menghapus')">Delete</a>
+                        <a href="edit_members.php?id_anggota=<?= $data['id_anggota'] ?>">Edit</a>
+                        <a href="delete_members.php?id_anggota=<?= $data['id_anggota'] ?>" onclick="return confirm('Yakin ingin menghapus')">Delete</a>
                     </td>
                 </tr>
             <?php endwhile ?>
