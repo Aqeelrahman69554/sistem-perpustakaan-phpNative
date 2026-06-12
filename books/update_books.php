@@ -13,6 +13,17 @@ $relase_year = $_POST['relase_year'];
 $stock = $_POST['stock'];
 $description = $_POST['description'];
 
+$cek_query = "SELECT id FROM books WHERE book_code = '$book_code' AND id != '$id'";
+$cek_result = mysqli_query($connect, $cek_query);
+
+if (mysqli_num_rows($cek_result) > 0) {
+    echo "<script>
+alert('Gagal mengubah! Karena Kode buku sudah digunakan oleh buku lain');
+window.history.back();
+    </script>";
+    exit;
+}
+
 $query = "UPDATE books SET
 book_code = '$book_code',
 title ='$title',
