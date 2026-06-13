@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../connection.php';
 
-$query_loans = "SELECT loans.*, members.full_name, books.title FROM loans INNER JOIN members ON loans.member_id = members.id_anggota INNER JOIN books ON loans.books_id = books.book_code";
+$query_loans = "SELECT loans.*, members.id_anggota, members.full_name, books.book_code, books.title FROM loans INNER JOIN members ON loans.member_id = members.id INNER JOIN books ON loans.books_id = books.id";
 
-$result = mysqli_query($connect,$query_loans);
+$result = mysqli_query($connect, $query_loans);
 
 
 ?>
@@ -35,7 +35,6 @@ $result = mysqli_query($connect,$query_loans);
             <th>Tanggal Pinjam</th>
             <th>Tanggal Kembali</th>
             <th>Status</th>
-            <th>Aksi</th>
         </thead>
         <tbody>
             <?php
@@ -43,17 +42,14 @@ $result = mysqli_query($connect,$query_loans);
             while ($data = mysqli_fetch_assoc($result)): ?>
                 <tr>
                     <td><?= $no++ ?></td>
-                    <td><?= $data['books_id'] ?></td>
-                    <td><?= $data['member_id'] ?></td>
+                    <td><?= $data['book_code'] ?></td>
+                    <td><?= $data['id_anggota'] ?></td>
                     <td><?= $data['full_name'] ?></td>
                     <td><?= $data['title'] ?></td>
                     <td><?= $data['loan_date'] ?></td>
                     <td><?= $data['return_date'] ?></td>
                     <td><?= $data['status'] ?></td>
-                    <td>
-                        <button><a href=""></a>Edit</button>
-                        <button><a href=""></a>Delete</button>
-                    </td>
+
                 </tr>
             <?php endwhile ?>
         </tbody>
