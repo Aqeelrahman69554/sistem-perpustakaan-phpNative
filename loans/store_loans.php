@@ -59,7 +59,7 @@ if ($execute_loan) {
     mysqli_query($connect, $update_stock);
 
     echo "<script>
-            alert('Buku berhasil dipinjam dan stok otomatis berkurang!');
+            alert('Buku berhasil dipinjam');
             window.location.href = 'index_loans.php';
         </script>";
     exit;
