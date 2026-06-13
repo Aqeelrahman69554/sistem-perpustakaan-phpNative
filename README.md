@@ -1,106 +1,107 @@
-# Sistem Perpustakaan
+# Sistem Perpustakaan PHP Native
 
-Sistem Perpustakaan adalah aplikasi web sederhana berbasis **PHP Native** dan **MySQL** untuk mengelola data buku, kategori buku, anggota perpustakaan, serta transaksi peminjaman buku.
+Sistem Perpustakaan adalah aplikasi web sederhana untuk mengelola data perpustakaan. Project ini dibuat menggunakan **PHP Native**, **MySQL/MariaDB**, dan **MySQLi** dengan struktur modul CRUD yang mudah dipahami.
 
-Project ini dibuat dengan struktur CRUD sederhana agar mudah dipahami, dikembangkan, dan diuji. Setiap modul dipisahkan ke dalam folder masing-masing supaya alur program lebih rapi.
+Aplikasi ini cocok digunakan sebagai project latihan manajemen basis data karena sudah mencakup relasi data antar tabel, validasi data duplikat, transaksi peminjaman, pengembalian buku, dan pembaruan stok buku.
 
-## Fitur Utama
+## Daftar Isi
 
-### 1. Manajemen Buku
+- [Fitur](#fitur)
+- [Teknologi](#teknologi)
+- [Struktur Project](#struktur-project)
+- [Kebutuhan Sistem](#kebutuhan-sistem)
+- [Konfigurasi Database](#konfigurasi-database)
+- [Struktur Tabel Database](#struktur-tabel-database)
+- [Cara Menjalankan Project](#cara-menjalankan-project)
+- [Alur Penggunaan](#alur-penggunaan)
+- [Pengujian Manual](#pengujian-manual)
+- [Catatan Pengembangan](#catatan-pengembangan)
 
-Fitur pada modul buku:
+## Fitur
+
+### Dashboard
+
+- Halaman utama aplikasi berada di `index.php`.
+- Navigasi utama dikelola melalui file `layouts/navbar.php`.
+- Terdapat modal catatan pengembang pada halaman awal.
+
+### Manajemen Kategori
+
+Modul kategori berada di folder `categories/`.
+
+Fitur yang tersedia:
+
+- Menampilkan daftar kategori.
+- Menambahkan kategori baru.
+- Mengubah data kategori.
+- Menghapus data kategori.
+- Validasi nama kategori agar tidak duplikat saat tambah dan edit data.
+
+### Manajemen Buku
+
+Modul buku berada di folder `books/`.
+
+Fitur yang tersedia:
 
 - Menampilkan daftar buku.
-- Menambahkan data buku baru.
+- Menambahkan buku baru.
 - Mengubah data buku.
 - Menghapus data buku.
-- Menampilkan kategori buku melalui relasi dengan tabel kategori.
-- Menyimpan informasi buku seperti:
-  - kode buku,
-  - judul,
-  - kategori,
-  - penulis,
-  - penerbit,
-  - tahun terbit,
-  - stok,
-  - deskripsi.
+- Menampilkan kategori buku melalui relasi `category_id`.
+- Validasi kode buku agar tidak duplikat saat tambah dan edit data.
+- Menyimpan data buku seperti kode buku, judul, kategori, penulis, penerbit, tahun terbit, stok, dan deskripsi.
 
-Fitur pengecekan pada modul buku:
+### Manajemen Anggota
 
-- Sistem mengecek apakah `book_code` sudah digunakan.
-- Jika kode buku sudah ada, data buku tidak akan disimpan.
-- Saat mengubah data buku, sistem juga mengecek agar kode buku tidak sama dengan buku lain.
+Modul anggota berada di folder `members/`.
 
-### 2. Manajemen Kategori
-
-Fitur pada modul kategori:
-
-- Menampilkan daftar kategori buku.
-- Menambahkan kategori baru.
-- Mengubah nama kategori.
-- Menghapus kategori.
-
-Fitur pengecekan pada modul kategori:
-
-- Sistem mengecek apakah nama kategori sudah digunakan.
-- Jika nama kategori sudah ada, sistem akan menampilkan peringatan dan membatalkan proses penyimpanan.
-- Saat mengubah kategori, sistem memastikan nama kategori tidak sama dengan kategori lain.
-
-### 3. Manajemen Anggota
-
-Fitur pada modul anggota:
+Fitur yang tersedia:
 
 - Menampilkan daftar anggota perpustakaan.
 - Menambahkan anggota baru.
 - Mengubah data anggota.
 - Menghapus data anggota.
-- Menyimpan informasi anggota seperti:
-  - ID anggota,
-  - nama lengkap,
-  - jenis kelamin,
-  - nomor telepon,
-  - alamat.
+- Validasi ID anggota agar tidak duplikat.
+- Menyimpan data anggota seperti ID anggota, nama lengkap, jenis kelamin, nomor telepon, dan alamat.
 
-Fitur pengecekan pada modul anggota:
+### Manajemen Peminjaman
 
-- Sistem mengecek apakah `id_anggota` sudah terdaftar.
-- Jika ID anggota sudah digunakan, data anggota baru tidak akan disimpan.
-- Saat mengubah data anggota, sistem mengecek agar ID anggota tidak bentrok dengan anggota lain.
+Modul peminjaman berada di folder `loans/`.
 
-### 4. Manajemen Peminjaman Buku
-
-Fitur pada modul peminjaman:
+Fitur yang tersedia:
 
 - Menampilkan daftar peminjaman buku.
 - Menambahkan transaksi peminjaman.
-- Menampilkan data peminjaman yang terhubung dengan data anggota dan data buku.
-- Menyimpan informasi peminjaman seperti:
-  - kode buku,
-  - ID anggota,
-  - nama anggota,
-  - judul buku,
-  - tanggal pinjam,
-  - tanggal kembali,
-  - status peminjaman.
+- Menampilkan data peminjaman yang terhubung dengan data anggota dan buku.
+- Validasi ID anggota berdasarkan tabel `members`.
+- Validasi kode buku berdasarkan tabel `books`.
+- Validasi tanggal kembali agar tidak lebih awal dari tanggal pinjam.
+- Validasi stok buku sebelum peminjaman.
+- Mengurangi stok buku otomatis saat peminjaman berhasil.
+- Mengatur status awal peminjaman menjadi `dipinjam`.
 
-Fitur pengecekan pada modul peminjaman:
+### Pengembalian Buku
 
-- Sistem mengecek apakah ID anggota yang dimasukkan terdaftar di tabel `members`.
-- Sistem mengecek apakah kode buku yang dimasukkan terdaftar di tabel `books`.
-- Sistem mengecek stok buku sebelum proses peminjaman.
-- Jika stok buku habis, peminjaman dibatalkan.
-- Jika peminjaman berhasil, stok buku otomatis berkurang satu.
-- Status awal peminjaman otomatis diisi dengan nilai `dipinjam`.
+Fitur pengembalian berada di file `loans/return_loans.php`.
 
-## Teknologi yang Digunakan
+Fitur yang tersedia:
+
+- Mengubah status peminjaman dari `dipinjam` menjadi `dikembalikan`.
+- Menambah stok buku otomatis saat buku dikembalikan.
+- Mencegah buku yang sudah dikembalikan diproses ulang.
+- Menghitung denda keterlambatan sebesar Rp2.000 per hari jika tanggal pengembalian melewati `return_date`.
+
+## Teknologi
 
 - PHP Native
-- MySQL / MariaDB
+- MySQL atau MariaDB
+- MySQLi
 - HTML
-- CSS sederhana
+- CSS
+- Bootstrap 5 CDN pada halaman utama
 - Laragon atau XAMPP sebagai local server
 
-## Struktur Folder
+## Struktur Project
 
 ```text
 sistem-perpustakaan/
@@ -125,6 +126,7 @@ sistem-perpustakaan/
 |-- loans/
 |   |-- create_loans.php
 |   |-- index_loans.php
+|   |-- return_loans.php
 |   `-- store_loans.php
 |-- members/
 |   |-- create_members.php
@@ -140,16 +142,16 @@ sistem-perpustakaan/
 
 ## Kebutuhan Sistem
 
-Sebelum menjalankan project, pastikan sudah tersedia:
+Pastikan perangkat sudah memiliki:
 
 - PHP 7.4 atau versi yang lebih baru.
 - MySQL atau MariaDB.
-- Laragon, XAMPP, atau local server lain.
+- Laragon, XAMPP, atau web server lokal lain.
 - Browser seperti Chrome, Edge, atau Firefox.
 
 ## Konfigurasi Database
 
-Koneksi database berada pada file:
+File konfigurasi koneksi database berada di:
 
 ```text
 connection.php
@@ -164,11 +166,16 @@ $password = "";
 $database = "sistem-perpustakaan";
 ```
 
-Pastikan database dengan nama `sistem-perpustakaan` sudah dibuat di MySQL.
+Jika konfigurasi MySQL di perangkat berbeda, sesuaikan nilai `$host`, `$username`, `$password`, dan `$database`.
 
-## Rancangan Tabel Database
+## Struktur Tabel Database
 
-Berikut rancangan tabel yang digunakan oleh aplikasi.
+Buat database dengan nama:
+
+```sql
+CREATE DATABASE `sistem-perpustakaan`;
+USE `sistem-perpustakaan`;
+```
 
 ### Tabel `categories`
 
@@ -195,6 +202,8 @@ CREATE TABLE books (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 ```
+
+Catatan: kolom `relase_year` mengikuti nama field yang digunakan pada kode program.
 
 ### Tabel `members`
 
@@ -224,11 +233,9 @@ CREATE TABLE loans (
 );
 ```
 
-Catatan: nama field `relase_year` mengikuti nama field yang digunakan di dalam kode program.
-
 ## Cara Menjalankan Project
 
-1. Letakkan folder project di dalam folder server lokal.
+1. Letakkan folder project di direktori web server lokal.
 
    Contoh Laragon:
 
@@ -244,17 +251,13 @@ Catatan: nama field `relase_year` mengikuti nama field yang digunakan di dalam k
 
 2. Jalankan Apache dan MySQL dari Laragon atau XAMPP.
 
-3. Buat database baru dengan nama:
+3. Buat database `sistem-perpustakaan`.
 
-   ```text
-   sistem-perpustakaan
-   ```
+4. Buat tabel database sesuai struktur pada bagian [Struktur Tabel Database](#struktur-tabel-database).
 
-4. Buat tabel sesuai rancangan database pada bagian sebelumnya.
+5. Sesuaikan konfigurasi koneksi di `connection.php` jika diperlukan.
 
-5. Sesuaikan konfigurasi database di file `connection.php` jika username, password, atau nama database berbeda.
-
-6. Buka project melalui browser:
+6. Buka aplikasi melalui browser:
 
    ```text
    http://localhost/sistem-perpustakaan
@@ -262,83 +265,82 @@ Catatan: nama field `relase_year` mengikuti nama field yang digunakan di dalam k
 
 ## Alur Penggunaan
 
-1. Tambahkan data kategori terlebih dahulu.
+1. Tambahkan data kategori buku.
 2. Tambahkan data buku dan pilih kategori yang sesuai.
 3. Tambahkan data anggota perpustakaan.
-4. Masuk ke halaman peminjaman.
+4. Buka halaman peminjaman.
 5. Isi ID anggota, kode buku, tanggal pinjam, dan tanggal kembali.
-6. Jika data valid dan stok tersedia, transaksi peminjaman akan tersimpan.
+6. Jika data valid dan stok tersedia, sistem menyimpan peminjaman dan stok buku berkurang otomatis.
+7. Saat buku dikembalikan, klik aksi `Kembalikan` pada halaman data peminjaman.
+8. Sistem mengubah status menjadi `dikembalikan`, menambah stok buku, dan menghitung denda jika terlambat.
 
-## Cara Mengecek Fitur
+## Pengujian Manual
 
-Bagian ini dapat digunakan untuk menguji apakah fitur aplikasi berjalan dengan benar.
+### Kategori
 
-### Cek Modul Kategori
+- Tambahkan kategori baru, misalnya `Novel`.
+- Coba tambahkan kategori dengan nama yang sama.
+- Sistem seharusnya menolak data duplikat.
+- Coba edit kategori menjadi nama kategori lain yang sudah ada.
+- Sistem seharusnya menolak perubahan tersebut.
 
-1. Buka halaman daftar kategori.
-2. Tambahkan kategori baru, misalnya `Novel`.
-3. Tambahkan kategori dengan nama yang sama.
-4. Sistem seharusnya menolak data duplikat dan menampilkan peringatan.
-5. Ubah nama kategori menjadi nama kategori lain yang sudah ada.
-6. Sistem seharusnya menolak perubahan tersebut.
+### Buku
 
-### Cek Modul Buku
+- Tambahkan buku baru dengan kode unik, misalnya `BK001`.
+- Coba tambahkan buku lain dengan kode yang sama.
+- Sistem seharusnya menolak data duplikat.
+- Coba edit kode buku menjadi kode yang sudah digunakan buku lain.
+- Sistem seharusnya menolak perubahan tersebut.
 
-1. Buka halaman daftar buku.
-2. Tambahkan buku baru dengan kode buku unik, misalnya `BK001`.
-3. Tambahkan buku lain dengan kode buku yang sama.
-4. Sistem seharusnya menolak karena kode buku sudah digunakan.
-5. Ubah kode buku menjadi kode yang sudah dipakai buku lain.
-6. Sistem seharusnya menolak perubahan tersebut.
+### Anggota
 
-### Cek Modul Anggota
+- Tambahkan anggota baru dengan ID unik, misalnya `1001`.
+- Coba tambahkan anggota lain dengan ID yang sama.
+- Sistem seharusnya menolak data duplikat.
+- Coba edit ID anggota menjadi ID yang sudah digunakan anggota lain.
+- Sistem seharusnya menolak perubahan tersebut.
 
-1. Buka halaman daftar anggota.
-2. Tambahkan anggota baru dengan ID anggota unik, misalnya `1001`.
-3. Tambahkan anggota lain dengan ID anggota yang sama.
-4. Sistem seharusnya menolak karena ID anggota sudah terdaftar.
-5. Ubah ID anggota menjadi ID yang sudah dipakai anggota lain.
-6. Sistem seharusnya menolak perubahan tersebut.
+### Peminjaman
 
-### Cek Modul Peminjaman
+- Pastikan sudah ada data anggota.
+- Pastikan sudah ada data buku dengan stok lebih dari 0.
+- Tambahkan peminjaman menggunakan ID anggota dan kode buku yang valid.
+- Sistem seharusnya menyimpan peminjaman dengan status `dipinjam`.
+- Stok buku seharusnya berkurang 1.
 
-1. Pastikan sudah ada data anggota.
-2. Pastikan sudah ada data buku dengan stok lebih dari 0.
-3. Buka halaman tambah peminjaman.
-4. Masukkan ID anggota yang benar.
-5. Masukkan kode buku yang benar.
-6. Isi tanggal pinjam dan tanggal kembali.
-7. Klik tombol `Pinjam`.
-8. Sistem seharusnya menyimpan data peminjaman dan mengurangi stok buku sebanyak satu.
+### Validasi Peminjaman
 
-### Cek Peminjaman dengan ID Anggota Salah
+- Masukkan ID anggota yang tidak terdaftar.
+- Sistem seharusnya menampilkan peringatan bahwa anggota tidak ditemukan.
+- Masukkan kode buku yang tidak terdaftar.
+- Sistem seharusnya menampilkan peringatan bahwa buku tidak terdaftar.
+- Masukkan tanggal kembali sebelum tanggal pinjam.
+- Sistem seharusnya menolak transaksi.
+- Pinjam buku dengan stok `0`.
+- Sistem seharusnya menolak peminjaman karena stok habis.
 
-1. Buka halaman tambah peminjaman.
-2. Masukkan ID anggota yang tidak ada di database.
-3. Isi data peminjaman lainnya.
-4. Sistem seharusnya menampilkan peringatan bahwa anggota tidak ditemukan.
+### Pengembalian
 
-### Cek Peminjaman dengan Kode Buku Salah
-
-1. Buka halaman tambah peminjaman.
-2. Masukkan kode buku yang tidak ada di database.
-3. Isi data peminjaman lainnya.
-4. Sistem seharusnya menampilkan peringatan bahwa buku tidak terdaftar.
-
-### Cek Peminjaman Saat Stok Habis
-
-1. Pastikan ada buku dengan stok `0`.
-2. Buka halaman tambah peminjaman.
-3. Masukkan kode buku tersebut.
-4. Isi ID anggota yang valid dan tanggal peminjaman.
-5. Sistem seharusnya menolak peminjaman dan menampilkan peringatan bahwa stok buku habis.
+- Buka halaman daftar peminjaman.
+- Klik aksi `Kembalikan` pada data dengan status `dipinjam`.
+- Sistem seharusnya mengubah status menjadi `dikembalikan`.
+- Stok buku seharusnya bertambah 1.
+- Jika tanggal pengembalian melewati tanggal kembali, sistem menampilkan total denda.
 
 ## Catatan Pengembangan
 
-- Aplikasi ini masih menggunakan PHP Native dan query MySQLi sederhana.
-- Validasi utama sudah dilakukan pada kode buku, nama kategori, ID anggota, dan stok buku.
-- Untuk pengembangan berikutnya, project dapat ditambahkan fitur login, pengembalian buku, pencarian data, pagination, dan validasi keamanan menggunakan prepared statement.
+- Project masih menggunakan PHP Native dan MySQLi.
+- Sebagian query sudah menggunakan prepared statement, terutama pada fitur peminjaman dan pengembalian.
+- Beberapa modul CRUD masih menggunakan query langsung, sehingga bisa dikembangkan lagi dengan prepared statement agar lebih aman.
+- Fitur yang bisa ditambahkan berikutnya:
+  - login dan role pengguna,
+  - pencarian data,
+  - pagination,
+  - export laporan,
+  - halaman detail buku,
+  - riwayat denda,
+  - file SQL dump agar instalasi database lebih cepat.
 
 ## Pembuat
 
-Project ini dibuat sebagai latihan pembuatan sistem perpustakaan berbasis PHP Native dan MySQL.
+Project ini dibuat sebagai latihan pembuatan Sistem Perpustakaan berbasis PHP Native dan MySQL.

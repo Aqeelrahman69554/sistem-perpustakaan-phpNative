@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <h1>Selamat Datang di Halaman Tambah Buku</h1>
+    <h1>Halaman Tambah Kategori Buku</h1>
     <form action="store_categories.php" method="post">
-        <label for="judul">Judul Buku</label place> :
-        <input type="text" name="category_name" placeholder="masukan judul buku disni....">
+        <label for="judul">Kategori Buku</label place> :
+        <input type="text" name="category_name" placeholder="masukan Kategori buku disni....">
 
         <br><br>
 
