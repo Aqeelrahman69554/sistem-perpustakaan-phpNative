@@ -14,7 +14,7 @@ $result = mysqli_query($connect, $query_loans);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Halaman Peminjaman Buku</title>
 </head>
 
 <body>
@@ -35,6 +35,7 @@ $result = mysqli_query($connect, $query_loans);
             <th>Tanggal Pinjam</th>
             <th>Tanggal Kembali</th>
             <th>Status</th>
+            <th>Aksi</th>
         </thead>
         <tbody>
             <?php
@@ -42,14 +43,22 @@ $result = mysqli_query($connect, $query_loans);
             while ($data = mysqli_fetch_assoc($result)): ?>
                 <tr>
                     <td><?= $no++ ?></td>
-                    <td><?= $data['book_code'] ?></td>
-                    <td><?= $data['id_anggota'] ?></td>
-                    <td><?= $data['full_name'] ?></td>
-                    <td><?= $data['title'] ?></td>
+                    <td><?= htmlspecialchars($data['book_code']) ?></td>
+                    <td><?= htmlspecialchars($data['id_anggota']) ?></td>
+                    <td><?= htmlspecialchars($data['full_name']) ?></td>
+                    <td><?= htmlspecialchars($data['title']) ?></td>
                     <td><?= $data['loan_date'] ?></td>
                     <td><?= $data['return_date'] ?></td>
-                    <td><?= $data['status'] ?></td>
-
+                    <td>
+                        <strong><?= ucfirst($data['status']) ?></strong>
+                    </td>
+                    <td>
+                        <?php if ($data['status'] === 'dipinjam'): ?>
+                            <a href="return_loans.php?id=<?= $data['id'] ?>" onclick="return confirm('Kembalikan buku ini?')">Kembalikan</a>
+                        <?php else: ?>
+                            -
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endwhile ?>
         </tbody>

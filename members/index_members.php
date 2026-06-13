@@ -28,7 +28,7 @@ $query = mysqli_query($connect, $query_members);
 <body>
     <?php $base_path = '../' ?>
     <?php include '../layouts/navbar.php' ?>
-    <h1>Selamat Datang di Halaman Anggota</h1>
+    <h1>Halaman Anggota</h1>
     <button><a href="create_members.php">Tambah Anggota</a></button>
     <br><br>
 

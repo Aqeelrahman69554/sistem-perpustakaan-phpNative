@@ -36,23 +36,16 @@
 
                 <div class="modal-body" style="padding: 24px; color: #333;">
                     <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; text-align: justify; margin-bottom: 15px;">
-                        <strong>Yth. Bapak/Ibu Dosen Pengampu</strong>, mohon izin. Proyek aplikasi <strong>Sistem Informasi Perpustakaan (SIPUS)</strong>
-                        yang merupakan pemenuhan tugas mata kuliah ini, saya unggah secara publik ke repositori <a href="">GitHub pribadi saya</a> sebagai bagian dari
-                        portofolio akademis dan rekam jejak digital proses belajar saya di Program Studi Ilmu Perpustakaan, UIN Sunan Kalijaga.
-                        Guna menyelaraskan dengan standar industri yang saya pelajari di berbagai platform, saya telah mengoptimasi arsitektur database relasional proyek ini (seperti data integrity
-                        dan manajemen otomatisasi stok) serta menyertakan dokumentasi lengkap.
+                        Yang saya hormati, Ibu Dr. Syifaun Nafisah, S.T., MT. selaku dosen pengampu mata kuliah Manajemen Basis Data.
+                        Melalui catatan ini, saya memohon izin untuk mengunggah proyek aplikasi Sistem Informasi Perpustakaan ini secara publik ke repositori <a href="https://github.com/Aqeelrahman69554/sistem-perpustakaan-phpNative" target="_blank">GitHub pribadi saya</a>. Proyek yang merupakan pemenuhan tugas Ujian Akhir Semester (UAS) ini saya publikasikan semata-mata untuk kepentingan portofolio akademis serta dokumentasi rekam jejak digital proses belajar saya, dan tidak ada maksud maupun tujuan lainnya.
                     </p>
 
                     <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; text-align: justify; margin-bottom: 15px;">
-                        Aplikasi ini dirancang menggunakan konfigurasi lingkungan lokal standar. Namun, sebagai opsi tambahan untuk mempermudah pengujian,
-                        <strong>jika aplikasi ini tidak bisa berjalan langsung di perangkat Bapak/Ibu, saya mohon izin untuk membuatkan file Docker</strong>
-                        (`Dockerfile` / `docker-compose.yml`) agar lingkungan sistem dapat terisolasi dan dijalankan secara instan.
+                        Dalam pengembangan sistem ini, saya telah berupaya mengimplementasikan arsitektur database relasional yang optimal—seperti menjaga data integrity serta menerapkan otomasi manajemen stok—guna menyelaraskan dengan standar industri dan materi yang telah Ibu ajarkan selama perkuliahan.
                     </p>
 
                     <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6; text-align: justify; margin-bottom: 0;">
-                        Oleh karena itu, jika Bapak/Ibu menemukan adanya kesalahan logika, ketidaksesuaian standar koding, atau bagian yang masih bisa dioptimasi,
-                        <strong>segala bentuk evaluasi, kritik, dan saran sangat saya butuhkan</strong> demi peningkatan kualitas koding saya ke depannya.
-                        Segala bentuk penilaian akademik sepenuhnya tetap merujuk pada ketentuan perkuliahan. Terima kasih banyak atas bimbingan yang Bapak/Ibu berikan.
+                        Oleh karena itu, saya sangat mengharapkan serta terbuka menerima segala bentuk evaluasi, kritik, maupun saran dari Ibu apabila terdapat kesalahan logika atau bagian koding yang masih perlu dioptimasi demi peningkatan kualitas kemampuan saya ke depan. Segala bentuk penilaian akademik sepenuhnya tetap merujuk pada ketentuan yang berlaku. Terima kasih banyak atas bimbingan dan ilmu yang telah Ibu berikan.
                     </p>
                 </div>
 
