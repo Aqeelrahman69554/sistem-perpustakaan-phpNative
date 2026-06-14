@@ -23,7 +23,26 @@ Aplikasi ini cocok digunakan sebagai project latihan manajemen basis data karena
 
 - Halaman utama aplikasi berada di `index.php`.
 - Navigasi utama dikelola melalui file `layouts/navbar.php`.
+- Footer aplikasi dikelola melalui file `layouts/footer.php`.
 - Terdapat modal catatan pengembang pada halaman awal.
+
+### Layout Aplikasi
+
+Project menggunakan folder `layouts/` untuk menyimpan bagian tampilan yang dipakai berulang.
+
+File layout yang tersedia:
+
+- `layouts/navbar.php` untuk menu navigasi utama.
+- `layouts/footer.php` untuk footer aplikasi.
+- `layouts/header.php` disiapkan untuk pengembangan struktur header.
+
+Footer sudah dipasang pada halaman index utama dan halaman daftar data:
+
+- `index.php`
+- `books/index_books.php`
+- `members/index_members.php`
+- `categories/index_categories.php`
+- `loans/index_loans.php`
 
 ### Manajemen Kategori
 
@@ -167,6 +186,8 @@ $database = "sistem-perpustakaan";
 ```
 
 Jika konfigurasi MySQL di perangkat berbeda, sesuaikan nilai `$host`, `$username`, `$password`, dan `$database`.
+
+Catatan: file `connection.php` hanya menampilkan pesan saat koneksi gagal. Jika koneksi berhasil, aplikasi tidak menampilkan teks tambahan agar tampilan halaman tetap rapi.
 
 ## Struktur Tabel Database
 
@@ -330,6 +351,7 @@ CREATE TABLE loans (
 ## Catatan Pengembangan
 
 - Project masih menggunakan PHP Native dan MySQLi.
+- Layout berulang seperti navbar dan footer dipisahkan ke folder `layouts/` agar lebih mudah digunakan di banyak halaman.
 - Sebagian query sudah menggunakan prepared statement, terutama pada fitur peminjaman dan pengembalian.
 - Beberapa modul CRUD masih menggunakan query langsung, sehingga bisa dikembangkan lagi dengan prepared statement agar lebih aman.
 - Fitur yang bisa ditambahkan berikutnya:
