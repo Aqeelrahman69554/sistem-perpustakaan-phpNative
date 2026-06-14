@@ -77,6 +77,10 @@ $query = mysqli_query($connect, $query_books);
             <?php endwhile; ?>
         </tbody>
     </table>
+    <br><br>
+    <hr>
+    <?php include '../layouts/footer.php' ?>
+
 </body>
 
 </html>

@@ -15,11 +15,13 @@ $query = mysqli_query($connect, $query_members);
     <title>Document</title>
     <style>
         thead,
-        th{
+        th {
             padding: 10px;
         }
+
         tbody,
-        tr,td{
+        tr,
+        td {
             padding: 5px;
         }
     </style>
@@ -62,6 +64,11 @@ $query = mysqli_query($connect, $query_members);
             <?php endwhile ?>
         </tbody>
     </table>
+    <br><br>
+
+    <hr>
+    <?php include '../layouts/footer.php' ?>
+
 </body>
 
 </html>
